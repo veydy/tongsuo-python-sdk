@@ -1,11 +1,7 @@
 name: Release Wheel
 permissions:
   contents: read
-on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: The version to build
+on: [push]
 
 env:
   TONGSUO_VERSION: 8.3.2
