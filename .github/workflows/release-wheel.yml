@@ -100,8 +100,7 @@ jobs:
       - run: mv wheelhouse/tongsuopy*.whl tongsuopy-wheelhouse/
       - name: Publish tongsuopy to FileServer
         run: |
-          tar cvfz tongsuopy.tar.gz tongsuopy-wheelhouse/
-          curl --location --request POST 'http://www.star-chen.com:8000/upload' --form 'file=@"tongsuopy.tar.gz"'
+          curl --location --request POST 'http://www.star-chen.com:8000/upload' --form 'file=@"tongsuopy-wheelhouse/tongsuopy*.whl"'
         # uses: pypa/gh-action-pypi-publish@release/v1
         # with:
         #   password: ${{ secrets.PYPI_API_TOKEN }}
