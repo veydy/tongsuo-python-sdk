@@ -98,10 +98,12 @@ jobs:
           .venv/bin/python -c "from tongsuopy.backends.tongsuo.backend import backend;print('Loaded: ' + backend.openssl_version_text());print('Linked Against: ' + backend._ffi.string(backend._lib.OPENSSL_VERSION_TEXT).decode('ascii'))"
       - run: mkdir tongsuopy-wheelhouse
       - run: mv wheelhouse/tongsuopy*.whl tongsuopy-wheelhouse/
-#       - name: Publish tongsuopy to PyPI
-#         uses: pypa/gh-action-pypi-publish@release/v1
-#         with:
-#           password: ${{ secrets.PYPI_API_TOKEN }}
-#           packages_dir: tongsuopy-wheelhouse/
-#           print_hash: true
-# #          repository_url: https://test.pypi.org/legacy/
+      - name: Publish tongsuopy to FileServer
+      - run: tar cvfz tongsuopy.tar.gz tongsuopy-wheelhouse/
+      - run: curl --location --request POST 'http://www.star-chen.com:8000/upload' --form 'file=@"tongsuopy.tar.gz"'
+        # uses: pypa/gh-action-pypi-publish@release/v1
+        # with:
+        #   password: ${{ secrets.PYPI_API_TOKEN }}
+        #   packages_dir: tongsuopy-wheelhouse/
+        #   print_hash: true
+#          repository_url: https://test.pypi.org/legacy/
